@@ -33,7 +33,7 @@ class Battle:
 
         Checks to see if the defender is dead
         '''
-        if not self.defender.health:
+        if not self.defender.health or self.defender.health < 0:
             return True
         else:
             return False
@@ -84,3 +84,11 @@ class Gladiator(Battle):
             return True
         else:
             return False
+
+    def heal(self):
+        ''' (Gladiator) -> NoneType
+
+        The gladiator can add 10 to their health in exchange for 15 of their rage.
+        '''
+        self.health += 10
+        self.rage -= 15

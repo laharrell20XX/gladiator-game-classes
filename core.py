@@ -4,6 +4,14 @@ from random import randrange, randint
 class Battle:
     ''' A Battle between two Gladiators '''
 
+    def __init__(self, attacker, defender):
+        ''' (Battle, Gladiator, Gladiator) -> NoneType 
+
+        Creates the attackers and the defenders for the battle
+        '''
+        self.attacker = defender
+        self.defender = attacker
+
 
 class Gladiator(Battle):
     ''' A new gladiator '''

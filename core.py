@@ -9,8 +9,24 @@ class Battle:
 
         Creates the attackers and the defenders for the battle
         '''
-        self.attacker = defender
-        self.defender = attacker
+        self.attacker = attacker
+        self.defender = defender
+
+    def attack(self):
+        ''' (Battle) -> NoneType
+
+        The attacker attacks the defender for a random number 
+        between attacker.damage_low and attacker.damage_high. 
+        After attacking, the attacker gets +15 rage.
+        '''
+        damage_dealt = randint(self.attacker.damage_low,
+                               self.attacker.damage_high)
+        if self.attacker.crit():
+            damage_dealt *= 2
+            self.defender.health -= damage_dealt
+        else:
+            self.attacker.rage += 15
+            self.defender.health -= damage_dealt
 
 
 class Gladiator(Battle):
@@ -45,21 +61,6 @@ class Gladiator(Battle):
         return "Gladiator('{}', {}, {}, {}, {})".format(
             self.gladiator_name, self.health, self.rage, self.damage_low,
             self.damage_high)
-
-    def attack(self, defender):
-        ''' (Gladiator, Gladiator) -> NoneType
-
-        The first Gladiator attacks the second gladiator for a random number 
-        between damage_low and damage_high. 
-        After attacking, the Gladiator gets +15 rage.
-        '''
-        damage_dealt = randint(self.damage_low, self.damage_high)
-        if self.crit():
-            damage_dealt *= 2
-            defender.health -= damage_dealt
-        else:
-            self.rage += 15
-            defender.health -= damage_dealt
 
     def crit(self):
         ''' (Gladiator) -> bool

@@ -28,6 +28,16 @@ class Battle:
             self.attacker.rage += 15
             self.defender.health -= damage_dealt
 
+    def if_dead(self):
+        ''' (Battle) -> bool
+
+        Checks to see if the defender is dead
+        '''
+        if not self.defender.health:
+            return True
+        else:
+            return False
+
 
 class Gladiator(Battle):
     ''' A new gladiator '''

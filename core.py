@@ -10,3 +10,7 @@ class Gladiator:
         self.rage = rage
         self.damage_low = damage_low
         self.damage_high = damage_high
+
+    def __str__(self):
+        return '''{}: {} HP ||| {} Rage'''.format(self.gladiator_name,
+                                                  self.health, self.rage)

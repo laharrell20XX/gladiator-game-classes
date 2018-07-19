@@ -33,3 +33,24 @@ class Gladiator:
         return "Gladiator('{}', {}, {}, {}, {})".format(
             self.gladiator_name, self.health, self.rage, self.damage_low,
             self.damage_high)
+
+    def attack(self, defender):
+        ''' (Gladiator, Gladiator) -> NoneType
+
+        The first Gladiator attacks the second gladiator for a random number 
+        between damage_low and damage_high. 
+        After attacking, the Gladiator gets +15 rage.
+        '''
+
+    def crit(self):
+        ''' (Gladiator) -> bool
+
+        The attacking gladiator has a chance to crit based on how much rage they possess.
+        After they crit their rage gets reset to 0.
+        '''
+        crit_chance = randrange(1, 100)
+        if crit_chance <= self.rage:
+            self.rage = 0
+            return True
+        else:
+            return False

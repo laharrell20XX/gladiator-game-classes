@@ -51,6 +51,15 @@ def health_rage_check(attacker):
         attacker.heal()
 
 
+def heads_or_tails():
+    while True:
+        player_call = input('\nPlayer 1... Heads or tails kitty cat?\n>>')
+        if player_call == 'heads' or player_call == 'tails':
+            return player_call
+        else:
+            print('\nI said heads or tails')
+
+
 def battle(attacker, defender):
     '''(Gladiator, Gladiator) -> NoneType
 

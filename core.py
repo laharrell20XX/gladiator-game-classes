@@ -24,10 +24,16 @@ class Battle:
                                self.attacker.damage_high)
         if self.attacker.crit():
             damage_dealt *= 2
+            if self.defender.is_defending:
+                damage_dealt -= (damage_dealt * .5)
             self.defender.health -= damage_dealt
             self.attacker.last_crit = True
         else:
-            self.attacker.rage += 15
+            if self.defender.is_defending:
+                damage_dealt -= (damage_dealt * .5)
+                self.attacker.rage = 0
+            else:
+                self.attacker.rage += 15
             self.defender.health -= damage_dealt
         self.attacker.last_attack = damage_dealt
 
@@ -58,7 +64,8 @@ class Battle:
 class Gladiator(Battle):
     ''' A new gladiator '''
 
-    def __init__(self, gladiator_name, health, rage, damage_low, damage_high):
+    def __init__(self, gladiator_name, health, rage, damage_low, damage_high,
+                 is_defending):
         ''' (Gladiator, str, int, int, int, int, int) -> NoneType
 
         Creates a new Gladiator with name gladiator_name, health, rage, lowest damage possibly dealt damage_low, and highest damage possibly dealt damage_high
@@ -70,6 +77,7 @@ class Gladiator(Battle):
         self.damage_high = damage_high
         self.last_attack = 0
         self.last_crit = False
+        self.is_defending = is_defending
 
     def __str__(self):
         ''' (Gladiator) -> str
@@ -110,3 +118,10 @@ class Gladiator(Battle):
         '''
         self.health += 10
         self.rage -= 15
+
+    def defend(self):
+        ''' (Gladiator) -> NoneType
+
+        Defense status of gladiator is set to 'blocking'
+        '''
+        self.is_defending = 'blocking'

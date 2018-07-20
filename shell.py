@@ -60,12 +60,11 @@ def heads_or_tails():
             print('\nI said heads or tails')
 
 
-def battle(attacker, defender):
+def battle(attacker, defender, turn):
     '''(Gladiator, Gladiator) -> NoneType
 
     The battle between attacker and defender
     '''
-    turn = Battle(attacker, defender)
     while not turn.if_dead():
         turn = Battle(attacker, defender)
         show_gladiators([attacker, defender])
@@ -96,10 +95,25 @@ def battle(attacker, defender):
         attacker, defender = defender, attacker
 
 
+def coin_flip(battle_set_up):
+    ''' (Battle, str) -> str
+
+    Player calls heads or tails and the computer flips the coin
+    '''
+    player_call = heads_or_tails()
+    battle_set_up.rand_starting_attacker(player_call)
+    if player_call == battle_set_up.coin_flip:
+        print('Player 1 wins the coin toss! Player 1 goes first')
+    else:
+        print('Player 2 wins coin toss! Player 2 goes first')
+
+
 def gladiator_game():
     gladiator_1 = Gladiator(greeting('Player 1'), 100, 0, 5, 15)
     gladiator_2 = Gladiator(greeting('Player 2'), 100, 0, 5, 15)
-    battle(gladiator_1, gladiator_2)
+    battle_set_up = Battle(gladiator_1, gladiator_2)
+    coin_flip(battle_set_up)
+    battle(battle_set_up.attacker, battle_set_up.defender, battle_set_up)
 
 
 def main():

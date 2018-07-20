@@ -1,4 +1,4 @@
-from random import randrange, randint
+from random import randrange, randint, choice
 
 
 class Battle:
@@ -11,6 +11,7 @@ class Battle:
         '''
         self.attacker = attacker
         self.defender = defender
+        self.coin_flip = ''
 
     def attack(self):
         ''' (Battle) -> NoneType
@@ -39,6 +40,19 @@ class Battle:
             return True
         else:
             return False
+
+    def rand_starting_attacker(self, player_choice):
+        ''' (Battle, str) -> NoneType
+
+        Chooses a random starting attacker from the gladiators provided
+        '''
+        coin_sides = ['heads', 'tails']
+        computer_flip = choice(coin_sides)
+        self.coin_flip = computer_flip
+        if computer_flip == player_choice:
+            self.attacker, self.defender = self.attacker, self.defender
+        else:
+            self.attacker, self.defender = self.defender, self.attacker
 
 
 class Gladiator(Battle):

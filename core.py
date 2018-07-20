@@ -24,9 +24,11 @@ class Battle:
         if self.attacker.crit():
             damage_dealt *= 2
             self.defender.health -= damage_dealt
+            self.attacker.last_crit = True
         else:
             self.attacker.rage += 15
             self.defender.health -= damage_dealt
+        self.attacker.last_attack = damage_dealt
 
     def if_dead(self):
         ''' (Battle) -> bool
@@ -43,7 +45,7 @@ class Gladiator(Battle):
     ''' A new gladiator '''
 
     def __init__(self, gladiator_name, health, rage, damage_low, damage_high):
-        ''' (Gladiator, str, int, int, int, int) -> NoneType
+        ''' (Gladiator, str, int, int, int, int, int) -> NoneType
 
         Creates a new Gladiator with name gladiator_name, health, rage, lowest damage possibly dealt damage_low, and highest damage possibly dealt damage_high
         '''
@@ -52,6 +54,8 @@ class Gladiator(Battle):
         self.rage = rage
         self.damage_low = damage_low
         self.damage_high = damage_high
+        self.last_attack = 0
+        self.last_crit = False
 
     def __str__(self):
         ''' (Gladiator) -> str
